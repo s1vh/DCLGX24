@@ -1,9 +1,6 @@
-// We define the empty imports so the auto-complete feature works as expected.
-import { engine, Transform, GltfContainer, PointerEventType, pointerEventsSystem, Entity, InputAction } from '@dcl/sdk/ecs'
+import { engine, Transform, GltfContainer, pointerEventsSystem, Entity, InputAction } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { changeColorSystem, circularSystem } from './systems'
-import { setupUi } from './ui'
-import { init } from './game'
+import { init, throwBall } from './game'
 
 export function main() {
   // Load models
@@ -46,8 +43,7 @@ export function main() {
       opts: { button: InputAction.IA_PRIMARY, hoverText: "Throw Ball" }
     },
     () => {
-      const transform = Transform.getMutable(ball);
-      transform.position = Vector3.create(transform.position.x, transform.position.y, transform.position.z + 5);
+      throwBall(ball, Vector3.create(0, 0, 1), 5);
     }
   );
 
